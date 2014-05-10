@@ -70,6 +70,7 @@ public class internet extends Thread{
                             //     Toast.LENGTH_SHORT).show();
 					}
 				});
+				socket.close();
 					
 			}
 			
