@@ -25,6 +25,7 @@ public class server {
 		try{
 			ServerSocket serverSocket = new ServerSocket(1234);
 			while (true) {
+				System.out.println("Ac");
 				 Socket socket = serverSocket.accept();
 				 DataInputStream in = new DataInputStream(socket.getInputStream());
 					DataOutputStream out = new
@@ -33,10 +34,12 @@ public class server {
 					Arrays.fill(data,(byte)0);
 					in.read(data);
 					String cmd = bytetoString(data);
+					System.out.println(cmd);
 					if(cmd.equals("connect"))
 					{
 						out.writeBytes("OK");
 					}
+					out.close();
 			}
 			
 		}catch(Exception e)

@@ -10,12 +10,15 @@ import java.util.Arrays;
 
 
 
+
 import android.os.Handler;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class internet extends Thread{
 	public String ip;
 	public int port;
+	public String text;
 	Handler notify = new Handler();
 	public internet()
 	{
@@ -61,15 +64,12 @@ public class internet extends Thread{
 			String cmd = bytetoString(data);
 			if(cmd.equals("OK"))
 			{
-				notify.post(new Runnable()
-				{
+				 
+			text = "Connected";
 					
-					public void run() {
-						// TODO Auto-generated method stub
-						// Toast.makeText(MainActivity.this, filename+"檔案傳送完成",
-                            //     Toast.LENGTH_SHORT).show();
-					}
-				});
+
+					
+				
 				socket.close();
 					
 			}

@@ -9,19 +9,44 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.os.Build;
 
 public class MainActivity extends Activity {
-
+	Button button = (Button)findViewById(R.id.button1);
+	EditText text = (EditText)findViewById(R.id.editText1);
+	TextView tt = (TextView)findViewById(R.id.textView1);
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}
+		
+		
+		button.setOnClickListener(new Button.OnClickListener(){ 
+
+            @Override
+
+            public void onClick(View v) {
+
+                // TODO Auto-generated method stub
+            	String ip= text.getText().toString();
+            	
+            	internet test = new internet(ip,1234);
+            	test.start();
+            	try {
+					test.join();
+					tt.setText(test.text);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+            }         
+
+        });     
 	}
 
 	@Override
