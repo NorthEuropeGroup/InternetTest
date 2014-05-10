@@ -2,6 +2,8 @@
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.*;
+import java.net.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
@@ -33,17 +35,18 @@ public class server {
 				System.out.println("Ac");
 				 Socket socket = serverSocket.accept();
 				 System.out.println("Ac");
-				 DataInputStream in = new DataInputStream(socket.getInputStream());
+				 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 					DataOutputStream out = new
 							DataOutputStream(socket.getOutputStream());
 					byte[] data = new byte[2048];
 					Arrays.fill(data,(byte)0);
-					in.read(data);
-					String cmd = bytetoString(data);
+					//in.read(data);
+					String cmd = in.readLine();
+					
 					System.out.println(cmd);
 					if(cmd.equals("connect"))
 					{
-						out.writeBytes("OK");
+						out.writeBytes("OK\n");
 					}
 					socket.close();
 			}

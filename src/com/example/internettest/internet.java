@@ -1,5 +1,7 @@
 package com.example.internettest;
 
+
+import java.io.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.InetAddress;
@@ -7,6 +9,8 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.util.Arrays;
+import java.net.*;
+
 
 
 
@@ -53,18 +57,18 @@ public class internet extends Thread{
 		
 		
 		try {
-			serverAddr = InetAddress.getByName("192.168.144.1");
-			sc_add= new InetSocketAddress(serverAddr,5000);
+			//serverAddr = InetAddress.getByName(ip);
+			//sc_add= new InetSocketAddress(serverAddr,5000);
 			
-			socket.connect(sc_add,2000);
-			DataInputStream in = new DataInputStream(socket.getInputStream());
+			socket = new Socket(ip,5000);
+			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			DataOutputStream out = new
 					DataOutputStream(socket.getOutputStream());
 			byte[] data = new byte[2048];
-			out.writeBytes("connect");
+			out.writeBytes("connect\n");
 			Arrays.fill(data, (byte)0);
-			in.read(data);
-			String cmd = bytetoString(data);
+			//in.read(data);
+			String cmd = in.readLine();//bytetoString(data);
 			if(cmd.equals("OK"))
 			{
 				 

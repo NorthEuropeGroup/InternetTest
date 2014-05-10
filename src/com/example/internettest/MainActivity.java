@@ -1,9 +1,18 @@
 package com.example.internettest;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.SocketAddress;
+import java.util.Arrays;
+
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,8 +44,16 @@ public class MainActivity extends Activity {
                 // TODO Auto-generated method stub
             	String ip= text.getText().toString();
             	
-            	Thread test = new internet("140.116.104.209",1234);
+            	internet test = new internet(ip,5000);
             	test.start();
+            	
+            	try {
+					test.join();
+					tt.setText(test.text);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             	
 
             }         
@@ -80,5 +97,7 @@ public class MainActivity extends Activity {
 			return rootView;
 		}
 	}
+	
+
 
 }
