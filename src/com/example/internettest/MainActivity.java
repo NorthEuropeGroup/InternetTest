@@ -15,16 +15,17 @@ import android.widget.TextView;
 import android.os.Build;
 
 public class MainActivity extends Activity {
-	Button button = (Button)findViewById(R.id.button1);
-	EditText text = (EditText)findViewById(R.id.editText1);
-	TextView tt = (TextView)findViewById(R.id.textView1);
+	Button button;
+	EditText text;
+	TextView tt ;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		
-		
+		button = (Button)findViewById(R.id.button1);
+		text = (EditText)findViewById(R.id.editText1);
+		tt = (TextView)findViewById(R.id.textView1);
 		button.setOnClickListener(new Button.OnClickListener(){ 
 
             @Override
@@ -34,15 +35,9 @@ public class MainActivity extends Activity {
                 // TODO Auto-generated method stub
             	String ip= text.getText().toString();
             	
-            	internet test = new internet(ip,1234);
+            	Thread test = new internet("140.116.104.209",1234);
             	test.start();
-            	try {
-					test.join();
-					tt.setText(test.text);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+            	
 
             }         
 

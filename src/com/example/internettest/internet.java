@@ -11,6 +11,7 @@ import java.util.Arrays;
 
 
 
+
 import android.os.Handler;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +43,8 @@ public class internet extends Thread{
 		  }
 		  return ans;
 	  }
+	
+	@Override
 	public void run()
 	{
 		InetAddress serverAddr = null;
@@ -50,9 +53,9 @@ public class internet extends Thread{
 		
 		
 		try {
-			serverAddr = InetAddress.getByName(ip);
-			sc_add= new InetSocketAddress(serverAddr,port);
-			socket = new Socket();
+			serverAddr = InetAddress.getByName("192.168.144.1");
+			sc_add= new InetSocketAddress(serverAddr,5000);
+			
 			socket.connect(sc_add,2000);
 			DataInputStream in = new DataInputStream(socket.getInputStream());
 			DataOutputStream out = new
@@ -65,12 +68,7 @@ public class internet extends Thread{
 			if(cmd.equals("OK"))
 			{
 				 
-			text = "Connected";
-					
-
-					
-				
-				socket.close();
+				text = "Connected";
 					
 			}
 			
